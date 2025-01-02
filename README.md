@@ -41,9 +41,13 @@ TaskJournal — это веб-приложение для управления �
     пример:
 
     DB_HOST=localhost
+
     DB_PORT=3306
+
     DB_DATABASE=to_do_list
+
     DB_USERNAME=root
+    
     DB_PASSWORD=
 
     APP_URL=http://example.com
