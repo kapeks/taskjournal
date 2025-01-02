@@ -1,0 +1,12 @@
+#делаем точкой входа в приложение папку public
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
+
+
+#блокируем доступ к .env
+<Files ".env">
+    Require all denied
+</Files>
+
+

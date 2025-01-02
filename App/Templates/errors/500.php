@@ -1,0 +1,1 @@
+<p><?= htmlspecialchars($error) ?></p>

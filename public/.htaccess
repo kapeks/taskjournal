@@ -1,0 +1,29 @@
+#перенаправление запросов
+RewriteEngine On
+#отдаем в ответ папку запроса
+RewriteCond %{SCRIPT_FILENAME} !-d
+#отдаем в ответ файл запроса, если папки нет
+RewriteCond %{SCRIPT_FILENAME} !-f
+#если нет файла и папки, тогда возвращаем index.php и сохраняем запрос в $_get[route]
+RewriteRule ^(.*)$ ./index.php?route=$1 [QSA,L]
+
+
+# Запрет на встраивание в iframe
+Header set X-Frame-Options "SAMEORIGIN"
+
+# Защита от XSS
+Header set X-XSS-Protection "1; mode=block"
+
+# Отключение автоопределения MIME-типов
+Header set X-Content-Type-Options "nosniff"
+
+# Заголовки безопасности
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+
+ErrorDocument 404 /errors/404.php
+ErrorDocument 500 /errors/500.php
