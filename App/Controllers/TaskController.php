@@ -149,7 +149,7 @@ class TaskController
 
             TaskService::completed($_POST['task_id'], $_SESSION['user_id']);
 
-            header("Location: /");
+            header("Location: /tasks");
             exit;
         } else {
             throw new NotFoundException();

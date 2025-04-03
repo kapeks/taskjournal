@@ -7,9 +7,10 @@ use PDO;
 
 class Db
 {
+    private static ?Db $instance = null;
     private PDO $pdo;
 
-    public function __construct()
+    private function __construct()
     {
         try {
             $dbOption = (require __DIR__ . '/../../config/database.php')['db'];
@@ -22,6 +23,14 @@ class Db
         } catch (\PDOException $e) {
             throw new DbException('ошибка подключения к бд' . $e->getMessage());
         }
+    }
+
+    public static function getInstance(): Db
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     /**

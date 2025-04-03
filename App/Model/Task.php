@@ -17,7 +17,7 @@ class Task extends Model
      */
     public static function findByAllUserId(int $userId): array
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $tableName = static::$tableName;
         $sql = "SELECT * FROM {$tableName} WHERE user_id = :user_id ORDER BY created_at DESC";
         $results = $db->query($sql, ['user_id' => $userId]) ?? [];

@@ -21,7 +21,7 @@ abstract class Model
      */
     public static function findAll(): array
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $tableName = static::$tableName;
         $sql = "SELECT * FROM {$tableName}";
         $results = $db->query($sql) ?? [];
@@ -44,7 +44,7 @@ abstract class Model
      */
     public static function find(int $id)
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $tableName = static::$tableName;
         $sql = "SELECT * FROM {$tableName} WHERE id = :id";
         $result = $db->query($sql, ['id' => $id]);
@@ -63,7 +63,7 @@ abstract class Model
      */
     public function save(): bool
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $tableName = static::$tableName;
 
         if (isset($this->attributes['id'])) {
@@ -88,7 +88,7 @@ abstract class Model
      */
     public function delete()
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $tableName = static::$tableName;
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
         $result = $db->query($sql, ['id' => $this->attributes['id']]);
@@ -118,7 +118,7 @@ abstract class Model
      */
     public static function findOneByColumn(string $columnName, $value): ?array
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $tableName = static::$tableName;
         $sql = "SELECT * FROM {$tableName} WHERE {$columnName} = :value LIMIT 1";
         $result = $db->query($sql, [
@@ -130,5 +130,4 @@ abstract class Model
         }
         return $result[0];
     }
-
 }
